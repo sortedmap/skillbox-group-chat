@@ -5,9 +5,10 @@ import main.model.UserRepository;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 
-import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 public class ChatController
@@ -24,8 +25,11 @@ public class ChatController
     {
         HashMap<String, Boolean> response = new HashMap<>();
 
+        Map<String, Boolean> result = new HashMap<>();
+        String sessionId = RequestContextHolder.currentRequestAttributes().getSessionId();
+        Optional<User> userOpt = userRepository.findBySessionId(sessionId);
 
-        response.put("result", false);
+        response.put("result", userOpt.isPresent());
         return response;
     }
 
