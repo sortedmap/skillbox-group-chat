@@ -28,3 +28,23 @@
     width: 800px;
     margin-right: 30px;
 }
+
+.message-item {
+    margin: 20px;
+}
+
+.message-header {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.datetime {
+    color: blue;
+    margin-right: 10px;
+}
+
+.username {
+    font-weight: bold;
+    color: red;
+}

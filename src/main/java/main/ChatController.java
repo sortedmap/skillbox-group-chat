@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 public class ChatController
@@ -72,7 +69,7 @@ public class ChatController
     @GetMapping("/message")
     public List<String> getMessagesList()
     {
-        return null;
+        return new ArrayList<>();
     }
 
     @GetMapping("/user")
