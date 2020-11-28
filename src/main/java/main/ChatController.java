@@ -1,18 +1,29 @@
 package main;
 
+import main.model.User;
+import main.model.UserRepository;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 
 @RestController
 public class ChatController
 {
+
+    private final UserRepository userRepository;
+
+    public ChatController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @GetMapping("/init")
     public HashMap<String, Boolean> init()
     {
         HashMap<String, Boolean> response = new HashMap<>();
-        //TODO: check sessionId. If found => true, if not => false
+
 
         response.put("result", false);
         return response;
@@ -22,10 +33,11 @@ public class ChatController
     public HashMap<String, Boolean> auth(@RequestParam String name)
     {
         HashMap<String, Boolean> response = new HashMap<>();
-        //TODO:
-        // — create User with name, sessionId
-        // - save User to DB
-
+        String sessionId = RequestContextHolder.currentRequestAttributes().getSessionId();
+        User user = new User();
+        user.setName(name);
+        user.setSessionId(sessionId);
+        userRepository.save(user);
         response.put("result", true);
         return response;
     }
