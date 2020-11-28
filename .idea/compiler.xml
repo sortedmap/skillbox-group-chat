@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="GroupChat" />
         <module name="group-chat" />
+        <module name="skillbox-group-chat" />
       </profile>
     </annotationProcessing>
   </component>
@@ -15,6 +16,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="GroupChat" options="-parameters" />
       <module name="group-chat" options="-parameters" />
+      <module name="skillbox-group-chat" options="-parameters" />
     </option>
   </component>
 </project>
