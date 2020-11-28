@@ -1,16 +1,20 @@
 package main;
 
+import main.dto.DtoMessage;
+import main.dto.MessageMapper;
 import main.model.Message;
 import main.model.MessageRepository;
 import main.model.User;
 import main.model.UserRepository;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 public class ChatController
@@ -21,6 +25,8 @@ public class ChatController
 
     @Autowired
     private MessageRepository messageRepository;
+
+    private MessageMapper messageMapper;
 
 
     @GetMapping("/init")
@@ -67,9 +73,13 @@ public class ChatController
     }
 
     @GetMapping("/message")
-    public List<String> getMessagesList()
+    public List<DtoMessage> getMessagesList()
     {
-        return new ArrayList<>();
+       return messageRepository
+               .findAll(Sort.by(Sort.Direction.ASC, "dateTime"))
+               .stream()
+               .map(message -> MessageMapper.map(message))
+               .collect(Collectors.toList());
     }
 
     @GetMapping("/user")
