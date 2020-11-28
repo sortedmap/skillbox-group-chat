@@ -9,10 +9,25 @@ import java.util.List;
 public class ChatController
 {
     @GetMapping("/init")
-    public Boolean init()
+    public HashMap<String, Boolean> init()
     {
+        HashMap<String, Boolean> response = new HashMap<>();
         //TODO: check sessionId. If found => true, if not => false
-        return true;
+
+        response.put("result", false);
+        return response;
+    }
+
+    @PostMapping("/auth")
+    public HashMap<String, Boolean> auth(@RequestParam String name)
+    {
+        HashMap<String, Boolean> response = new HashMap<>();
+        //TODO:
+        // — create User with name, sessionId
+        // - save User to DB
+
+        response.put("result", true);
+        return response;
     }
 
     @PostMapping("/message")
